@@ -99,7 +99,7 @@ public class ModelActivity extends AppCompatActivity {
         // Create our 3D sceneario
         if (paramUri == null) {
             //scene = new ExampleSceneLoader(this);
-            Toast.makeText(this, "Param is Null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Unable to generate 3D model", Toast.LENGTH_SHORT).show();
         } else {
             scene = new SceneLoader(this);
         }
