@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import jtheiner.drawingclassification.controller.TouchController;
 
+
 /**
  * This is the actual opengl view. From here we can detect touch gestures for example
  *
