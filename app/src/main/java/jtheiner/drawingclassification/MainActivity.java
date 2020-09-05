@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Init Firebase
         FirebaseApp.initializeApp(this);
 
 
