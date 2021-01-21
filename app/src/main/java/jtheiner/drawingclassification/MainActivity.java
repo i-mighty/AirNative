@@ -140,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void load3DObjectWhenClassificationIsCorrect(int index) {
         if ((classifier.getProbability(index) * 100) > 50) {
-            showProgress(index);
             downloadAndRender3DObject(classifier.getLabel(index).toLowerCase());
         }
     }
@@ -151,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadAndRender3DObject(String fileName) {
         if (isConnected) {
+            showProgress(fileName);
             modelRef = storage.getReference().child(fileName + ".obj");
 
             final File localFile = new File(getCacheDir(), fileName + ".obj");
@@ -163,7 +163,10 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("uri", "file://" + localFile.getPath());
                 intent.putExtra("immersiveMode", "true");
                 MainActivity.this.startActivity(intent);
-            }).addOnFailureListener(exception -> Log.i("Renderer ", ";local tem file not created  created " + exception.toString()));
+            }).addOnFailureListener(exception -> {
+                Log.i("Renderer ", ";local tem file not created  created " + exception.toString());
+                hideProgress();
+            });
         } else
             builder.show();
     }
@@ -200,8 +203,8 @@ public class MainActivity extends AppCompatActivity {
         textViewResult.setText("");
     }
 
-    private void showProgress(int index) {
-        ((TextView) findViewById(R.id.progressText)).setText(getString(R.string.loading, classifier.getLabel(index)));
+    private void showProgress(String objectName) {
+        ((TextView) findViewById(R.id.progressText)).setText(getString(R.string.loading, objectName));
         progressDialog.setVisibility(View.VISIBLE);
     }
 
