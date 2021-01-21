@@ -17,10 +17,10 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.storage.FirebaseStorage;
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private TextView textViewDraw;
 
+    private MaterialCardView progressDialog;
+
     //Classes declaration
     private StorageReference modelRef;
     private FirebaseStorage storage;
@@ -62,13 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
-
-        paintView = findViewById(R.id.paintView);
-        paintView.init(); // initial drawing view
-        textViewResult = findViewById(R.id.txt_result_label);
-        textViewDraw = findViewById(R.id.txt_draw_label);
-
-        storage = FirebaseStorage.getInstance();
+        doInit();
 
         // instantiate classifier
         try {
@@ -94,6 +90,16 @@ public class MainActivity extends AppCompatActivity {
         this.mainView = this.findViewById(R.id.activity_main).getRootView();
 
         resetView();
+    }
+
+    private void doInit() {
+        paintView = findViewById(R.id.paintView);
+        paintView.init(); // initial drawing view
+        textViewResult = findViewById(R.id.txt_result_label);
+        textViewDraw = findViewById(R.id.txt_draw_label);
+        progressDialog = findViewById(R.id.progressDialog);
+
+        storage = FirebaseStorage.getInstance();
     }
 
 
@@ -127,13 +133,14 @@ public class MainActivity extends AppCompatActivity {
             load3DObjectWhenClassificationIsCorrect(expectedIndex);
         } else {
             mainView.setBackgroundColor(Color.rgb(204, 0, 0));
+            hideProgress();
         }
 
     }
 
     private void load3DObjectWhenClassificationIsCorrect(int index) {
         if ((classifier.getProbability(index) * 100) > 50) {
-            Toast.makeText(this, "Loading 3D Model for " + classifier.getLabel(index), Toast.LENGTH_SHORT).show();
+            showProgress(index);
             downloadAndRender3DObject(classifier.getLabel(index).toLowerCase());
         }
     }
@@ -182,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
         mainView.setBackgroundColor(Color.WHITE);
         paintView.clear();
         textViewResult.setText("");
-
         // get a random label and set as expected class
         classifier.setExpectedIndex(new Random().nextInt(classifier.getNumberOfClasses()));
         textViewDraw.setText(String.format("Draw ... %s", classifier.getLabel(classifier.getExpectedIndex())));
@@ -194,4 +200,18 @@ public class MainActivity extends AppCompatActivity {
         textViewResult.setText("");
     }
 
+    private void showProgress(int index) {
+        ((TextView) findViewById(R.id.progressText)).setText(getString(R.string.loading, classifier.getLabel(index)));
+        progressDialog.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress() {
+        progressDialog.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideProgress();
+    }
 }

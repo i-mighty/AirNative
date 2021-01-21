@@ -7,4 +7,5 @@
     <string name="next">Next</string>
     <string name="clear_paint">Clear Paint</string>
     <string name="draw">Draw</string>
+    <string name="loading">Please wait…\nLoading 3D Model for %1$s</string>
 </resources>
