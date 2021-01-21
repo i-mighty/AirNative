@@ -3,7 +3,6 @@ package jtheiner.drawingclassification;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -20,14 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -35,6 +30,7 @@ import org.andresoviedo.util.android.ContentUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Random;
 
 import jtheiner.drawingclassification.classification.ImageClassifier;
@@ -91,19 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
         builder = new MaterialAlertDialogBuilder(this, R.style.RoundShapeTheme)
                 .setTitle("No Internet")
-                .setMessage("You are currently offline\nCheck you internet to continue")
-                .setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+                .setMessage("You are currently offline\nCheck you internet try again")
+                .setNegativeButton("Ignore", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss());
 
         this.mainView = this.findViewById(R.id.activity_main).getRootView();
 
@@ -113,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClearClick(View view) {
         Log.i("MainActivity", "Clear sketch event triggers");
-        paintView.clear();
+        clearView(); //clear view and let try again
     }
 
     public void onDetectClick(View view) {
@@ -130,50 +116,47 @@ public class MainActivity extends AppCompatActivity {
         textViewResult.setText("");
         for (int index : result.getTopK()) {
             textViewResult.setText(
-                    String.format("%s\n%s (%s%%)", textViewResult.getText(), classifier.getLabel(index), String.format("%.02f", classifier.getProbability(index) * 100))
+                    String.format("%s\n%s (%s%%)", textViewResult.getText(), classifier.getLabel(index),
+                            String.format(Locale.getDefault(), "%.02f", classifier.getProbability(index) * 100))
             );
-            if ((classifier.getProbability(index) * 100) > 50) {
-                Toast.makeText(this, "Loading 3D Model for " + classifier.getLabel(index), Toast.LENGTH_SHORT).show();
-                downloadFile(classifier.getLabel(index).toLowerCase());
-            }
         }
 
         int expectedIndex = classifier.getExpectedIndex();
         if (result.getTopK().contains(expectedIndex)) {
             mainView.setBackgroundColor(Color.rgb(78, 175, 36));
+            load3DObjectWhenClassificationIsCorrect(expectedIndex);
         } else {
             mainView.setBackgroundColor(Color.rgb(204, 0, 0));
         }
 
     }
 
+    private void load3DObjectWhenClassificationIsCorrect(int index) {
+        if ((classifier.getProbability(index) * 100) > 50) {
+            Toast.makeText(this, "Loading 3D Model for " + classifier.getLabel(index), Toast.LENGTH_SHORT).show();
+            downloadAndRender3DObject(classifier.getLabel(index).toLowerCase());
+        }
+    }
+
     public void onNextClick(View view) {
         resetView();
     }
 
-    private void downloadFile(String fileName) {
+    private void downloadAndRender3DObject(String fileName) {
         if (isConnected) {
             modelRef = storage.getReference().child(fileName + ".obj");
 
             final File localFile = new File(getCacheDir(), fileName + ".obj");
-            modelRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.i("Renderer ", ";local tem file created  created " + localFile.toString());
-                    Log.i("Renderer ", ";local tem file dir" + localFile.getAbsolutePath());
-                    Intent intent = new Intent(MainActivity.this.getApplicationContext(), ModelActivity.class);
-                    ContentUtils.setCurrentDir(localFile.getParentFile());
-                    Log.i("Renderer ", ";local tem file dir: file://" + localFile.getAbsolutePath());
-                    intent.putExtra("uri", "file://" + localFile.getPath());
-                    intent.putExtra("immersiveMode", "true");
-                    MainActivity.this.startActivity(intent);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    Log.i("Renderer ", ";local tem file not created  created " + exception.toString());
-                }
-            });
+            modelRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Log.i("Renderer ", ";local tem file created  created " + localFile.toString());
+                Log.i("Renderer ", ";local tem file dir" + localFile.getAbsolutePath());
+                Intent intent = new Intent(MainActivity.this.getApplicationContext(), ModelActivity.class);
+                ContentUtils.setCurrentDir(localFile.getParentFile());
+                Log.i("Renderer ", ";local tem file dir: file://" + localFile.getAbsolutePath());
+                intent.putExtra("uri", "file://" + localFile.getPath());
+                intent.putExtra("immersiveMode", "true");
+                MainActivity.this.startActivity(intent);
+            }).addOnFailureListener(exception -> Log.i("Renderer ", ";local tem file not created  created " + exception.toString()));
         } else
             builder.show();
     }
@@ -202,6 +185,13 @@ public class MainActivity extends AppCompatActivity {
 
         // get a random label and set as expected class
         classifier.setExpectedIndex(new Random().nextInt(classifier.getNumberOfClasses()));
-        textViewDraw.setText("Draw ... " + classifier.getLabel(classifier.getExpectedIndex()));
+        textViewDraw.setText(String.format("Draw ... %s", classifier.getLabel(classifier.getExpectedIndex())));
     }
+
+
+    private void clearView() {
+        paintView.clear();
+        textViewResult.setText("");
+    }
+
 }
