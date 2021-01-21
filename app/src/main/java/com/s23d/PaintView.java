@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification;
+package com.s23d;
 
 
 import android.content.Context;
@@ -11,9 +11,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.ArrayList;
+import com.s23d.classification.ImageClassifier;
 
-import jtheiner.drawingclassification.classification.ImageClassifier;
+import java.util.ArrayList;
 
 
 /**
@@ -33,11 +33,11 @@ public class PaintView extends View {
 
     private float mX, mY;
     private Path mPath;
-    private Paint mPaint;
-    private ArrayList<PenPath> paths = new ArrayList<>();
+    private final Paint mPaint;
+    private final ArrayList<PenPath> paths = new ArrayList<>();
     private Bitmap mBitmap;
     private Canvas mCanvas;
-    private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+    private final Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
     public PaintView(Context context) {
         this(context, null);

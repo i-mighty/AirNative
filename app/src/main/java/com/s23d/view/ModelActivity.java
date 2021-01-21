@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification.view;
+package com.s23d.view;
 
 import android.annotation.TargetApi;
 import android.content.ContentResolver;
@@ -18,12 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.s23d.demo.SceneLoader;
 
 import org.andresoviedo.util.android.ContentUtils;
 
 import java.io.IOException;
-
-import jtheiner.drawingclassification.demo.SceneLoader;
 
 /**
  * This activity represents the container for our 3D viewer.
@@ -50,7 +49,7 @@ public class ModelActivity extends AppCompatActivity {
     /**
      * Background GL clear color. Default is light gray
      */
-    private float[] backgroundColor = new float[]{0f, 0f, 0f, 1.0f};
+    private final float[] backgroundColor = new float[]{0f, 0f, 0f, 1.0f};
 
     private ModelSurfaceView gLView;
 

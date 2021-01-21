@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification;
+package com.s23d;
 
 
 import android.app.Dialog;
@@ -25,6 +25,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.s23d.classification.ImageClassifier;
+import com.s23d.classification.Result;
+import com.s23d.view.ModelActivity;
 
 import org.andresoviedo.util.android.ContentUtils;
 
@@ -32,10 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Random;
-
-import jtheiner.drawingclassification.classification.ImageClassifier;
-import jtheiner.drawingclassification.classification.Result;
-import jtheiner.drawingclassification.view.ModelActivity;
 
 
 public class MainActivity extends AppCompatActivity {

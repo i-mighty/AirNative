@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification.controller;
+package com.s23d.controller;
 
 import android.graphics.PointF;
 import android.opengl.Matrix;
@@ -8,11 +8,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import org.andresoviedo.android_3d_model_engine.model.Camera;
+import com.s23d.demo.SceneLoader;
+import com.s23d.view.ModelRenderer;
+import com.s23d.view.ModelSurfaceView;
 
-import jtheiner.drawingclassification.demo.SceneLoader;
-import jtheiner.drawingclassification.view.ModelRenderer;
-import jtheiner.drawingclassification.view.ModelSurfaceView;
+import org.andresoviedo.android_3d_model_engine.model.Camera;
 
 public class TouchController {
 
@@ -58,9 +58,9 @@ public class TouchController {
     private float previousY1;
     private float previousX2;
     private float previousY2;
-    private float[] previousVector = new float[4];
-    private float[] vector = new float[4];
-    private float[] rotationVector = new float[4];
+    private final float[] previousVector = new float[4];
+    private final float[] vector = new float[4];
+    private final float[] rotationVector = new float[4];
     private float previousRotationSquare;
 
     public TouchController(ModelSurfaceView view, ModelRenderer renderer) {
@@ -305,12 +305,12 @@ class TouchScreen {
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
     // these matrices will be used to move and zoom image
-    private android.graphics.Matrix matrix = new android.graphics.Matrix();
-    private android.graphics.Matrix savedMatrix = new android.graphics.Matrix();
+    private final android.graphics.Matrix matrix = new android.graphics.Matrix();
+    private final android.graphics.Matrix savedMatrix = new android.graphics.Matrix();
     private int mode = NONE;
     // remember some things for zooming
-    private PointF start = new PointF();
-    private PointF mid = new PointF();
+    private final PointF start = new PointF();
+    private final PointF mid = new PointF();
     private float oldDist = 1f;
     private float d = 0f;
     private float newRot = 0f;

@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification.demo;
+package com.s23d.demo;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.s23d.view.ModelActivity;
 
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
 import org.andresoviedo.android_3d_model_engine.services.Object3DBuilder;
@@ -15,8 +17,6 @@ import org.andresoviedo.util.io.IOUtils;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import jtheiner.drawingclassification.view.ModelActivity;
 
 /**
  * This class loads a 3D scene as an example of what can be done with the app
@@ -35,8 +35,8 @@ public class ExampleSceneLoader extends SceneLoader {
         super.init();
         new AsyncTask<Void, Void, Void>() {
 
-            ProgressDialog dialog = new ProgressDialog(parent);
-            List<Exception> errors = new ArrayList<>();
+            final ProgressDialog dialog = new ProgressDialog(parent);
+            final List<Exception> errors = new ArrayList<>();
 
             @Override
             protected void onPreExecute() {

@@ -8,7 +8,7 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
     defaultConfig {
-        applicationId "jtheiner.drawingclassification"
+        applicationId "com.s23d"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

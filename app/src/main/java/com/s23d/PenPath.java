@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification;
+package com.s23d;
 
 import android.graphics.Path;
 

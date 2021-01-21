@@ -1,11 +1,11 @@
-package jtheiner.drawingclassification.view;
+package com.s23d.view;
 
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
-import java.io.IOException;
+import com.s23d.controller.TouchController;
 
-import jtheiner.drawingclassification.controller.TouchController;
+import java.io.IOException;
 
 /**
  * This is the actual opengl view. From here we can detect touch gestures for example
@@ -14,9 +14,9 @@ import jtheiner.drawingclassification.controller.TouchController;
  */
 public class ModelSurfaceView extends GLSurfaceView {
 
-    private ModelActivity parent;
-    private ModelRenderer mRenderer;
-    private TouchController touchHandler;
+    private final ModelActivity parent;
+    private final ModelRenderer mRenderer;
+    private final TouchController touchHandler;
 
     public ModelSurfaceView(ModelActivity parent) throws IllegalAccessException, IOException {
         super(parent);

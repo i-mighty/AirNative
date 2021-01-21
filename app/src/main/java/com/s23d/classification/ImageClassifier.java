@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification.classification;
+package com.s23d.classification;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -25,10 +25,10 @@ public class ImageClassifier {
     public static final int DIM_IMG_SIZE_WIDTH = 28;
     private static final int DIM_PIXEL_SIZE = 1;
 
-    private ArrayList<String> labels; // list of all labels
+    private final ArrayList<String> labels; // list of all labels
     private ByteBuffer imgData = null; // models input format
-    private Interpreter tflite; // the model
-    private int[] imagePixels = new int[DIM_IMG_SIZE_HEIGHT * DIM_IMG_SIZE_WIDTH];
+    private final Interpreter tflite; // the model
+    private final int[] imagePixels = new int[DIM_IMG_SIZE_HEIGHT * DIM_IMG_SIZE_WIDTH];
     private final float[][] result; // depending on models architecture (possible multiple output)
 
     private int expectedIndex; // random label index which is to be drawn

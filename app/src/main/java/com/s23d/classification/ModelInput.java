@@ -1,4 +1,4 @@
-package jtheiner.drawingclassification.classification;
+package com.s23d.classification;
 
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;

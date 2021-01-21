@@ -1,9 +1,12 @@
-package jtheiner.drawingclassification.demo;
+package com.s23d.demo;
 
 import android.net.Uri;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.s23d.view.ModelActivity;
+import com.s23d.view.ModelRenderer;
 
 import org.andresoviedo.android_3d_model_engine.animation.Animator;
 import org.andresoviedo.android_3d_model_engine.collision.CollisionDetection;
@@ -24,9 +27,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import jtheiner.drawingclassification.view.ModelActivity;
-import jtheiner.drawingclassification.view.ModelRenderer;
-
 /**
  * This class loads a 3D scena as an example of what can be done with the app
  *
@@ -37,7 +37,7 @@ public class SceneLoader implements LoaderTask.Callback {
     /**
      * Default model color: yellow
      */
-    private static float[] DEFAULT_COLOR = {1.0f, 1.0f, 0, 1.0f};
+    private static final float[] DEFAULT_COLOR = {1.0f, 1.0f, 0, 1.0f};
     /**
      * Parent component
      */
@@ -81,7 +81,7 @@ public class SceneLoader implements LoaderTask.Callback {
     /**
      * Whether to draw face normals. Normally used to debug models
      */
-    private boolean drawNormals = false;
+    private final boolean drawNormals = false;
     /**
      * Whether to draw using textures
      */
@@ -133,7 +133,7 @@ public class SceneLoader implements LoaderTask.Callback {
     /**
      * Animator
      */
-    private Animator animator = new Animator();
+    private final Animator animator = new Animator();
     /**
      * Did the user touched the model for the first time?
      */

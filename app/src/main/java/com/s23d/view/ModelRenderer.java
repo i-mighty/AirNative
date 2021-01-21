@@ -1,9 +1,11 @@
-package jtheiner.drawingclassification.view;
+package com.s23d.view;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
+
+import com.s23d.demo.SceneLoader;
 
 import org.andresoviedo.android_3d_model_engine.animation.Animator;
 import org.andresoviedo.android_3d_model_engine.drawer.DrawerFactory;
@@ -23,8 +25,6 @@ import java.util.Map;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import jtheiner.drawingclassification.demo.SceneLoader;
-
 public class ModelRenderer implements GLSurfaceView.Renderer {
 
     private final static String TAG = ModelRenderer.class.getName();
@@ -35,7 +35,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     private static final float[] COLOR_RED = {1.0f, 0.0f, 0.0f, 1f};
     private static final float[] COLOR_BLUE = {0.0f, 1.0f, 0.0f, 1f};
     // stereoscopic variables
-    private static float EYE_DISTANCE = 0.64f;
+    private static final float EYE_DISTANCE = 0.64f;
     /**
      * 3D Axis (to show if needed)
      */
@@ -54,7 +54,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     private final float[] projectionMatrixRight = new float[16];
     private final float[] viewProjectionMatrixRight = new float[16];
     // 3D window (parent component)
-    private ModelSurfaceView main;
+    private final ModelSurfaceView main;
     // width of the screen
     private int width;
     // height of the screen
@@ -62,20 +62,20 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     /**
      * Drawer factory to get right renderer/shader based on object attributes
      */
-    private DrawerFactory drawer;
+    private final DrawerFactory drawer;
     // The wireframe associated shape (it should be made of lines only)
-    private Map<Object3DData, Object3DData> wireframes = new HashMap<>();
+    private final Map<Object3DData, Object3DData> wireframes = new HashMap<>();
     // The loaded textures
-    private Map<Object, Integer> textures = new HashMap<>();
+    private final Map<Object, Integer> textures = new HashMap<>();
     // The corresponding opengl bounding boxes and drawer
-    private Map<Object3DData, Object3DData> boundingBoxes = new HashMap<>();
+    private final Map<Object3DData, Object3DData> boundingBoxes = new HashMap<>();
     // The corresponding opengl bounding boxes
-    private Map<Object3DData, Object3DData> normals = new HashMap<>();
-    private Map<Object3DData, Object3DData> skeleton = new HashMap<>();
+    private final Map<Object3DData, Object3DData> normals = new HashMap<>();
+    private final Map<Object3DData, Object3DData> skeleton = new HashMap<>();
     /**
      * Whether the info of the model has been written to console log
      */
-    private Map<Object3DData, Boolean> infoLogged = new HashMap<>();
+    private final Map<Object3DData, Boolean> infoLogged = new HashMap<>();
     /**
      * Switch to akternate drawing of right and left image
      */
@@ -84,7 +84,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     /**
      * Skeleton Animator
      */
-    private Animator animator = new Animator();
+    private final Animator animator = new Animator();
     /**
      * Did the application explode?
      */

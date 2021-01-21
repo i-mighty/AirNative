@@ -1,22 +1,20 @@
-package jtheiner.drawingclassification.classification;
+package com.s23d.classification;
 
-import android.util.ArrayMap;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Readable representation of the models output vector.
  * Contains label, label position in result vector and probability.
  */
 public class Result {
-    private String label;
-    private int labelPosition;
-    private float probability;
-    private List<Integer> topK; // contains the index
+    private final String label;
+    private final int labelPosition;
+    private final float probability;
+    private final List<Integer> topK; // contains the index
 
     public Result(float[] result, ArrayList<String> labels) {
         this.labelPosition = argmax(result); // set index position
