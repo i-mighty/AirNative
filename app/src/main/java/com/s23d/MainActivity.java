@@ -29,8 +29,6 @@ import com.s23d.classification.ImageClassifier;
 import com.s23d.classification.Result;
 import com.s23d.view.ModelActivity;
 
-import org.andresoviedo.util.android.ContentUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -157,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Renderer ", ";local tem file created  created " + localFile.toString());
                 Log.i("Renderer ", ";local tem file dir" + localFile.getAbsolutePath());
                 Intent intent = new Intent(MainActivity.this.getApplicationContext(), ModelActivity.class);
-                ContentUtils.setCurrentDir(localFile.getParentFile());
+               // ContentUtils.setCurrentDir(localFile.getParentFile());
                 Log.i("Renderer ", ";local tem file dir: file://" + localFile.getAbsolutePath());
                 intent.putExtra("uri", "file://" + localFile.getPath());
                 intent.putExtra("immersiveMode", "true");
