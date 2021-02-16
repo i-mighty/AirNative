@@ -28,9 +28,9 @@ public class ContentUtils {
     /**
      * Documents opened by the user. This list helps finding the relative filenames found in the model
      */
-    private static Map<String, Uri> documentsProvided = new HashMap<>();
+    private static final Map<String, Uri> documentsProvided = new HashMap<>();
 
-    private static ThreadLocal<Activity> currentActivity = new ThreadLocal<>();
+    private static final ThreadLocal<Activity> currentActivity = new ThreadLocal<>();
 
     private static File currentDir = null;
 

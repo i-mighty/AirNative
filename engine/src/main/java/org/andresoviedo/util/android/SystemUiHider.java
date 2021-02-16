@@ -55,7 +55,7 @@ public abstract class SystemUiHider {
     /**
      * A dummy no-op callback for use when there is no other listener set.
      */
-    private static OnVisibilityChangeListener sDummyListener = new OnVisibilityChangeListener() {
+    private static final OnVisibilityChangeListener sDummyListener = new OnVisibilityChangeListener() {
         @Override
         public void onVisibilityChange(boolean visible) {
         }

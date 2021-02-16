@@ -29,14 +29,14 @@ public class GeometryLoader {
     private final XmlNode materialsData;
     private final XmlNode effectsData;
     private final XmlNode imagesNode;
+    private final Map<String, SkinningData> skinningDataMap;
+    private final SkeletonData skeletonData;
     List<Vertex> vertices = new ArrayList<>();
     List<float[]> vertex = new ArrayList<>();
     List<float[]> textures = new ArrayList<>();
     List<float[]> normals = new ArrayList<>();
     List<Integer> indices = new ArrayList<>();
     List<float[]> colors = new ArrayList<>();
-    private Map<String, SkinningData> skinningDataMap;
-    private SkeletonData skeletonData;
     private float[] verticesArray;
     private float[] normalsArray;
     private float[] texturesArray;

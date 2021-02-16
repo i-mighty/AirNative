@@ -32,6 +32,10 @@ import java.util.List;
  */
 public class Object3DData {
 
+    private final List<InputStream> textureStreams = null;
+    private final HashMap<String, FloatBuffer> textureCoords = new HashMap<>();
+    // errors detected
+    private final List<String> errors = new ArrayList<>();
     // Transformation data
     protected float[] translation = new float[]{0f, 0f, 0f};
     protected float[] position = new float[]{0f, 0f, 0f};
@@ -43,7 +47,6 @@ public class Object3DData {
     protected float[] quadRotation = new float[]{0f, 0f, 0f, 1f};
     protected float[] scale = new float[]{1, 1, 1};
     protected float[] modelMatrix = new float[16];
-
     // Model data for the simplest object
     // opengl version to use to draw this object
     private int version = 5;
@@ -87,13 +90,11 @@ public class Object3DData {
     private List<int[]> drawModeList = null;
     // texture
     private byte[] textureData = null;
-    private List<InputStream> textureStreams = null;
     private int textureWrapS = GLES20.GL_REPEAT;
     private int textureWrapT = GLES20.GL_REPEAT;
     private int textureMinFilter = GLES20.GL_NEAREST;
     private int textureMagFilter = GLES20.GL_NEAREST;
     private int isDoubleSided = 0;
-    private HashMap<String, FloatBuffer> textureCoords = new HashMap<>();
     private FloatBuffer textureCoordsArrayBuffer = null;
     private FloatBuffer emissiveTextureCoordsArrayBuffer = null;
     // emissive texture
@@ -112,8 +113,6 @@ public class Object3DData {
     private WavefrontLoader loader;
     // collision detection
     private Octree octree = null;
-    // errors detected
-    private List<String> errors = new ArrayList<>();
 
     {
         Matrix.setIdentityM(modelMatrix, 0);

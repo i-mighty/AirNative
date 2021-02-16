@@ -60,6 +60,11 @@ public class WavefrontLoader {
     private static final float DUMMY_Z_TC = -5.0f;
     // flags
     private static final int triangleMode = GLES20.GL_TRIANGLE_FAN;
+    private final ArrayList<Tuple3> texCoords;
+    private final FaceMaterials faceMats; // materials used by faces
+    private final ModelDimensions modelDims; // model dimensions
+    private final String modelNm; // without path or ".OBJ" extension
+    private final float maxSize; // for scaling the model
     // metadata
     int numVerts = 0;
     // whether the model uses 3D or 2D tex coords
@@ -71,13 +76,8 @@ public class WavefrontLoader {
     int numTriangles = 0;
     int numVertsReferences = 0;
     private boolean hasTCs3D = false;
-    private ArrayList<Tuple3> texCoords;
     private Faces faces; // model faces
-    private FaceMaterials faceMats; // materials used by faces
     private Materials materials; // materials defined in MTL file
-    private ModelDimensions modelDims; // model dimensions
-    private String modelNm; // without path or ".OBJ" extension
-    private float maxSize; // for scaling the model
     // buffers
     private FloatBuffer vertsBuffer;
     private FloatBuffer normalsBuffer;
@@ -481,13 +481,12 @@ public class WavefrontLoader {
     } // end of Tuple3 class
 
     public static class ModelDimensions {
+        // for reporting
+        private final DecimalFormat df = new DecimalFormat("0.##"); // 2 dp
         // edge coordinates
         public float leftPt, rightPt; // on x-axis
         public float topPt, bottomPt; // on y-axis
         public float farPt, nearPt; // on z-axis
-
-        // for reporting
-        private DecimalFormat df = new DecimalFormat("0.##"); // 2 dp
 
         public ModelDimensions() {
             leftPt = 0.0f;
@@ -694,15 +693,13 @@ public class WavefrontLoader {
     } // end of Materials class
 
     public static class Material {
-        private String name;
-
+        private final String name;
+        // texture info
+        private final String texFnm;
         // colour info
         private Tuple3 ka, kd, ks; // ambient, diffuse, specular colours
         private float ns; // shininess
         private float d; // alpha
-
-        // texture info
-        private String texFnm;
         private String texture;
 
         public Material(String nm) {
@@ -1004,10 +1001,10 @@ public class WavefrontLoader {
 
     public static class FaceMaterials {
         // the face index (integer) where a material is first used
-        private HashMap<Integer, String> faceMats;
+        private final HashMap<Integer, String> faceMats;
 
         // for reporting
-        private HashMap<String, Integer> matCount;
+        private final HashMap<String, Integer> matCount;
 
         // how many times a material (string) is used
 

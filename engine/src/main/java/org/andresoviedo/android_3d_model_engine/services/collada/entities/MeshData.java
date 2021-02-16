@@ -11,16 +11,16 @@ public class MeshData {
 
     private static final int DIMENSIONS = 3;
 
-    private String id;
-    private float[] vertices;
-    private float[] textureCoords;
-    private float[] normals;
-    private float[] color;
-    private FloatBuffer colorsBuffer;
-    private String texture;
-    private int[] indices;
-    private int[] jointIds;
-    private float[] vertexWeights;
+    private final String id;
+    private final float[] vertices;
+    private final float[] textureCoords;
+    private final float[] normals;
+    private final float[] color;
+    private final FloatBuffer colorsBuffer;
+    private final String texture;
+    private final int[] indices;
+    private final int[] jointIds;
+    private final float[] vertexWeights;
 
     public MeshData(String id, float[] vertices, float[] textureCoords, float[] normals, float[] color, FloatBuffer colorsBuffer, String texture, int[] indices,
                     int[] jointIds, float[] vertexWeights) {

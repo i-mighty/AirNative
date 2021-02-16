@@ -340,7 +340,7 @@ public final class Object3DBuilder {
     /**
      * Default vertices colors
      */
-    private static float[] DEFAULT_COLOR = {1.0f, 1.0f, 0, 1.0f};
+    private static final float[] DEFAULT_COLOR = {1.0f, 1.0f, 0, 1.0f};
     //@formatter:on
 
     public static Object3DData buildPoint(float[] point) {

@@ -15,11 +15,11 @@ public class Camera {
             -ROOM_CENTER_SIZE, ROOM_CENTER_SIZE, -ROOM_CENTER_SIZE, ROOM_CENTER_SIZE);
     private final BoundingBox roomBox = new BoundingBox("scene", -ROOM_SIZE, ROOM_SIZE,
             -ROOM_SIZE, ROOM_SIZE, -ROOM_SIZE, ROOM_SIZE);
+    private final float[] buffer = new float[12 + 12 + 16 + 16];
     public float xPos, yPos; // Camera position.
     public float zPos;
     public float xView, yView, zView; // Look at position.
     public float xUp, yUp, zUp; // Up direction.
-    private float[] buffer = new float[12 + 12 + 16 + 16];
     private long animationCounter;
     private Object[] lastAction;
     private boolean changed = false;

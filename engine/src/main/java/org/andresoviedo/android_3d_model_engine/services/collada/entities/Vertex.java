@@ -3,14 +3,11 @@ package org.andresoviedo.android_3d_model_engine.services.collada.entities;
 public class Vertex {
 
     private static final int NO_INDEX = -1;
-
+    private final float length;
     private float[] position;
     private int textureIndex = NO_INDEX;
     private int normalIndex = NO_INDEX;
     private int colorIndex = NO_INDEX;
-    private float length;
-
-
     private VertexSkinData weightsData;
 
     public Vertex(float[] position) {

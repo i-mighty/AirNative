@@ -20,11 +20,11 @@ public class DrawerFactory {
      * shader code loaded from raw resources
      * resources are cached on activity thread
      */
-    private Map<String, String> shadersCode = new HashMap<>();
+    private final Map<String, String> shadersCode = new HashMap<>();
     /**
      * list of opengl drawers
      */
-    private Map<String, DrawerImpl> drawers = new HashMap<>();
+    private final Map<String, DrawerImpl> drawers = new HashMap<>();
 
     public DrawerFactory(Context context) throws IllegalAccessException, IOException {
 
