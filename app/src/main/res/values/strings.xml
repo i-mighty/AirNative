@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Sketch Recognition</string>
+    <string name="app_name">com.s23d</string>
+    <string name="app_name_initial">Sketch Recognition</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
