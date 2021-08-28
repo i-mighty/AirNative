@@ -1,112 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context="com.s23d.MainActivity">
 
-    <com.s23d.PaintView
-        android:id="@+id/paintView"
-        android:layout_width="380dp"
-        android:layout_height="380dp"
-        android:layout_below="@+id/txt_draw_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
-
-    <Button
-        android:id="@+id/btn_detect"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_next"
-        android:layout_alignParentStart="true"
-        android:layout_margin="16dp"
-        android:onClick="onDetectClick"
-        android:text="@string/detect" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="16dp"
-        android:onClick="onNextClick"
-        android:text="@string/next" />
+        <com.s23d.PaintView
+            android:id="@+id/paintView"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_below="@+id/txt_draw_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp" />
 
-    <Button
-        android:id="@+id/btn_clear3"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:onClick="onClearClick"
-        android:text="@string/clear_paint" />
-
-    <TextView
-        android:id="@+id/txt_draw_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="13dp"
-        android:text="@string/draw"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/txt_result_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_detect"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
-        tools:text="TextView" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/progressDialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:minWidth="200dp"
-        android:visibility="visible"
-        app:cardElevation="14dp">
-
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_detect"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_next"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="onDetectClick"
+            android:text="@string/detect" />
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                android:indeterminate="true"
-                android:progressBackgroundTint="@color/colorPrimary"
-                android:progressTint="@color/colorPrimary"
-                android:secondaryProgressTint="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/progressText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                android:gravity="center"
-                android:text="@string/loading"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:textStyle="normal" />
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:onClick="onNextClick"
+            android:text="@string/next" />
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_clear3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:onClick="onClearClick"
+            android:text="@string/clear_paint" />
+
+        <TextView
+            android:id="@+id/txt_draw_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="13dp"
+            android:text="@string/draw"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_result_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btn_detect"
+            android:layout_below="@+id/paintView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="16sp"
+            tools:text="TextView" />
+    </RelativeLayout>
+
+</ScrollView>

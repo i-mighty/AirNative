@@ -18,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.storage.FirebaseStorage;
@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private TextView textViewDraw;
 
-    private MaterialCardView progressDialog;
-
     //Classes declaration
     private StorageReference modelRef;
     private FirebaseStorage storage;
@@ -53,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isConnected;
     private MaterialAlertDialogBuilder builder;
+    private MaterialAlertDialogBuilder progressBuilder;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,18 +84,21 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Ignore", (dialogInterface, i) -> dialogInterface.dismiss())
                 .setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss());
 
+        progressBuilder = new MaterialAlertDialogBuilder(this, R.style.RoundShapeTheme)
+                .setView(R.layout.progress);
+        dialog = progressBuilder.create();
+
         this.mainView = this.findViewById(R.id.activity_main).getRootView();
 
         resetView();
     }
+
 
     private void doInit() {
         paintView = findViewById(R.id.paintView);
         paintView.init(); // initial drawing view
         textViewResult = findViewById(R.id.txt_result_label);
         textViewDraw = findViewById(R.id.txt_draw_label);
-        progressDialog = findViewById(R.id.progressDialog);
-
         storage = FirebaseStorage.getInstance();
     }
 
@@ -130,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             load3DObjectWhenClassificationIsCorrect(expectedIndex);
         } else {
             mainView.setBackgroundColor(Color.rgb(204, 0, 0));
-            hideProgress();
+            dialog.dismiss();
         }
 
     }
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadAndRender3DObject(String fileName) {
         if (isConnected) {
-            showProgress(fileName);
+            dialog.show();
             modelRef = storage.getReference().child(fileName + ".obj");
 
             final File localFile = new File(getCacheDir(), fileName + ".obj");
@@ -155,14 +158,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Renderer ", ";local tem file created  created " + localFile.toString());
                 Log.i("Renderer ", ";local tem file dir" + localFile.getAbsolutePath());
                 Intent intent = new Intent(MainActivity.this.getApplicationContext(), ModelActivity.class);
-               // ContentUtils.setCurrentDir(localFile.getParentFile());
+                // ContentUtils.setCurrentDir(localFile.getParentFile());
                 Log.i("Renderer ", ";local tem file dir: file://" + localFile.getAbsolutePath());
                 intent.putExtra("uri", "file://" + localFile.getPath());
                 intent.putExtra("immersiveMode", "true");
                 MainActivity.this.startActivity(intent);
             }).addOnFailureListener(exception -> {
                 Log.i("Renderer ", ";local tem file not created  created " + exception.toString());
-                hideProgress();
+                dialog.dismiss();
             });
         } else
             builder.show();
@@ -200,18 +203,11 @@ public class MainActivity extends AppCompatActivity {
         textViewResult.setText("");
     }
 
-    private void showProgress(String objectName) {
-        ((TextView) findViewById(R.id.progressText)).setText(getString(R.string.loading, objectName));
-        progressDialog.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgress() {
-        progressDialog.setVisibility(View.GONE);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        hideProgress();
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 }

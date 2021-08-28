@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">com.s23d</string>
+    <string name="app_name">Air</string>
     <string name="app_name_initial">Sketch Recognition</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="detect">Detect</string>
     <string name="next">Next</string>
-    <string name="clear_paint">Clear Paint</string>
+    <string name="clear_paint">Clear Canvas</string>
     <string name="draw">Draw</string>
-    <string name="loading">Please wait…\nLoading 3D Model for %1$s</string>
+    <string name="loading">Please wait while the model is loading…</string>
 </resources>
