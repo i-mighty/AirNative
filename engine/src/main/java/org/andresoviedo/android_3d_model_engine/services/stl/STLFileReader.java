@@ -36,7 +36,7 @@ import java.util.List;
  * @version $Revision: 1.3 $
  */
 public class STLFileReader {
-    private STLParser itsParser;
+    private final STLParser itsParser;
 
     /**
      * Creates a <code>STLFileReader</code> object to read a STL file from a

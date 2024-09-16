@@ -35,13 +35,13 @@ import java.util.Map;
  */
 public class GltfLoader {
 
-    private static Map<String, Integer> keyHandleMap = new HashMap<>();
-    private static String[] textureKeys = {"baseColorTexture"
+    private static final Map<String, Integer> keyHandleMap = new HashMap<>();
+    private static final String[] textureKeys = {"baseColorTexture"
             , "emissiveTexture"
             , "occlusionTexture"
             , "normalTexture"};
 
-    private static Map<NodeModel, List<AnimatedModel>> nodeMap = new HashMap<>();
+    private static final Map<NodeModel, List<AnimatedModel>> nodeMap = new HashMap<>();
 
     // read model data and fill in data in Object3DData structure
     public static Object[] buildAnimatedModel(URI uri) throws IOException {

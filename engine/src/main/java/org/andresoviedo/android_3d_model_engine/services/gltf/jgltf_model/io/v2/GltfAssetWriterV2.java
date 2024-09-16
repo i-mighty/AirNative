@@ -163,7 +163,7 @@ public final class GltfAssetWriterV2 {
         /**
          * The stream that will collect the data
          */
-        private ByteArrayOutputStream baos;
+        private final ByteArrayOutputStream baos;
 
         /**
          * Default constructor

@@ -43,7 +43,7 @@ class DrawerImpl implements Object3D {
     private final SparseArray<String> cache1 = new SparseArray<>();
     // animation data
     // put 0 to draw progressively, -1 to draw at once
-    private long counter = -1;
+    private final long counter = -1;
     private double shift = -1d;
     // does the device support drawElements for GL_UNSIGNED_INT or not?
     private boolean drawUsingUnsignedInt = true;

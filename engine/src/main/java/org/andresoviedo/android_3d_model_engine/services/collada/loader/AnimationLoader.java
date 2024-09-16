@@ -15,8 +15,8 @@ import java.util.TreeSet;
 
 public class AnimationLoader {
 
-    private XmlNode animationData;
-    private XmlNode jointHierarchy;
+    private final XmlNode animationData;
+    private final XmlNode jointHierarchy;
 
     public AnimationLoader(XmlNode animationData, XmlNode jointHierarchy) {
         this.animationData = animationData;

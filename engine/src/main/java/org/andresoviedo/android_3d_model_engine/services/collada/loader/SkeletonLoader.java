@@ -18,7 +18,7 @@ public class SkeletonLoader {
 
     private final SkinningData skinningData;
 
-    private List<String> boneOrder;
+    private final List<String> boneOrder;
 
     private int jointCount = 0;
     private boolean jointFound = false;

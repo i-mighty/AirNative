@@ -36,9 +36,9 @@ public class Animator {
 
     private final float[] IDENTITY_MATRIX = new float[16];
     private final Map<String, float[]> cache = new HashMap<>();
-    private float animationTime = 0;
     // TODO: implement slower/faster speed
-    private float speed = 1f;
+    private final float speed = 1f;
+    private float animationTime = 0;
 
     public Animator() {
         Matrix.setIdentityM(IDENTITY_MATRIX, 0);

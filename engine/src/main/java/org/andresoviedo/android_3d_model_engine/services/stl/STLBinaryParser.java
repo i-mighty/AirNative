@@ -37,32 +37,29 @@ class STLBinaryParser extends STLParser {
     /**
      * size of binary header
      */
-    private static int HEADER_SIZE = 84;
+    private static final int HEADER_SIZE = 84;
 
     /**
      * size of one facet record in binary format
      */
-    private static int RECORD_SIZE = 50;
+    private static final int RECORD_SIZE = 50;
 
     /**
      * size of comments in header
      */
-    private static int COMMENT_SIZE = 80;
-
+    private static final int COMMENT_SIZE = 80;
+    /**
+     * Common buffer for reading
+     */
+    private final byte[] itsReadBuffer;
+    /**
+     * Common buffer for reading the converted data from bytes
+     */
+    private final int[] itsDataBuffer;
     /**
      * The stream that is being read from
      */
     private BufferedInputStream itsStream;
-
-    /**
-     * Common buffer for reading
-     */
-    private byte[] itsReadBuffer;
-
-    /**
-     * Common buffer for reading the converted data from bytes
-     */
-    private int[] itsDataBuffer;
 
     public STLBinaryParser() {
         itsReadBuffer = new byte[48];
